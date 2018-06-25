@@ -1,13 +1,21 @@
-<ion-content scroll="false">
-  <div class="splash-bg"></div>
-  <div class="splash-info">
-    <div class="splash-logo"></div>
-    <div class="splash-intro">
-      {{ 'WELCOME_INTRO' | translate }}
+<ion-header>
+  <header-component [title]="title"></header-component>
+</ion-header>
+<ion-content>
+  <div class="page-container">
+    <div class="button button-login">
+      <label class="button-label" for="login">
+        Login Button
+      </label>
+      <button ion-button block id="login" (click)="doLogin()">
+      </button>
     </div>
-  </div>
-  <div padding>
-    <button ion-button block (click)="signup()">{{ 'SIGNUP' | translate }}</button>
-    <button ion-button block (click)="login()" class="login">{{ 'LOGIN' | translate }}</button>
+    <div class="button button-signup">
+      <label class="button-label" for="sign-up">
+        Sign-up
+      </label>
+      <button ion-button block class="button button-signup" id="sign-up">
+      </button>
+    </div>
   </div>
 </ion-content>

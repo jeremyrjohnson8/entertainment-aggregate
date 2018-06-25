@@ -1,0 +1,19 @@
+
+header-component {
+    ion-navbar {
+        .toolbar-background {
+          background: color($colors, secondary);
+        }
+        .toolbar-title {
+          left: 0;
+          width: 100%;
+          transform: translateX(-10%);
+          text-align: center;
+          color: color($colors, light);
+        }
+        .menu-button {
+          color: color($colors, light);
+        }
+      }
+}
+

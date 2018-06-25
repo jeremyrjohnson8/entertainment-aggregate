@@ -13,6 +13,19 @@ import { Items } from '../mocks/providers/items';
 import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
 
+/// Firebase Inputs
+import { firebaseConfig } from '../environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { PagesModule } from '../modules/pages.module';
+import { ComponentsModule } from '../modules/components.module';
+import { MovieProvider } from '../providers/movie/movie';
+import { UndefinedProvider } from '../providers/undefined/undefined';
+import { OmdbApiProvider } from '../providers/omdb-api/omdb-api';
+
+
+
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
 export function createTranslateLoader(http: HttpClient) {
@@ -40,6 +53,8 @@ export function provideSettings(storage: Storage) {
   ],
   imports: [
     BrowserModule,
+    PagesModule,
+    ComponentsModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -49,7 +64,10 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    AngularFireModule.initializeApp(firebaseConfig),
+    IonicStorageModule.forRoot(),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,8 +81,10 @@ export function provideSettings(storage: Storage) {
     SplashScreen,
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
-    // Keep this to enable Ionic's runtime error handling during development
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    MovieProvider,
+    UndefinedProvider,
+    OmdbApiProvider
   ]
 })
 export class AppModule { }

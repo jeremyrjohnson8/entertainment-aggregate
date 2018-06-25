@@ -4,33 +4,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 
-import { FirstRunPage } from '../pages';
 import { Settings } from '../providers';
+import { WELCOME_PAGE } from '../constants/page.constants';
 
 @Component({
-  template: `<ion-menu [content]="content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Pages</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content>
-      <ion-list>
-        <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-          {{p.title}}
-        </button>
-      </ion-list>
-    </ion-content>
-
-  </ion-menu>
-  <ion-nav #content [root]="rootPage"></ion-nav>`
+  templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = FirstRunPage;
+  rootPage = WELCOME_PAGE;
 
   @ViewChild(Nav) nav: Nav;
 
+
+  // set up page list
   pages: any[] = [
     { title: 'Tutorial', component: 'TutorialPage' },
     { title: 'Welcome', component: 'WelcomePage' },
@@ -81,9 +67,13 @@ export class MyApp {
     });
   }
 
-  openPage(page) {
+  openPage() {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    this.nav.setRoot(WELCOME_PAGE);
+  }
+
+  checkAuthStatus(): void {
+
   }
 }

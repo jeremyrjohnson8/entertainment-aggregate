@@ -1,0 +1,11 @@
+<ion-navbar>
+  <button ion-button menuToggle class="menu-button">
+    <ion-icon name="menu"></ion-icon>
+  </button>
+  <ion-title>
+    <span class="font-weight-bold">{{title}}</span>
+  </ion-title>
+</ion-navbar>
+<div class="subHeader">
+  <ng-content select="[sub-header]"></ng-content>
+</div>
