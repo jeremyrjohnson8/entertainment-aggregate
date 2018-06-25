@@ -1,3 +1,4 @@
+import { ProvidersModule } from './../modules/providers.module';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,15 +15,13 @@ import { Settings, User, Api } from '../providers';
 import { MyApp } from './app.component';
 
 /// Firebase Inputs
-import { firebaseConfig } from '../environment';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { PagesModule } from '../modules/pages.module';
 import { ComponentsModule } from '../modules/components.module';
-import { MovieProvider } from '../providers/movie/movie';
-import { UndefinedProvider } from '../providers/undefined/undefined';
-import { OmdbApiProvider } from '../providers/omdb-api/omdb-api';
+import { environment } from '../environments/environment';
+import { MemoryStoreProvider } from '../providers/memory-store/memory-store';
 
 
 
@@ -56,6 +55,7 @@ export function provideSettings(storage: Storage) {
     PagesModule,
     ComponentsModule,
     HttpClientModule,
+    ProvidersModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -64,7 +64,7 @@ export function provideSettings(storage: Storage) {
       }
     }),
     IonicModule.forRoot(MyApp),
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebase),
     IonicStorageModule.forRoot(),
     AngularFireAuthModule,
     AngularFireDatabaseModule
@@ -82,9 +82,7 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    MovieProvider,
-    UndefinedProvider,
-    OmdbApiProvider
+    MemoryStoreProvider
   ]
 })
 export class AppModule { }

@@ -2,8 +2,11 @@ page-welcome {
   .page-container {
     width: auto; 
     height: 100vh;
-    background: url('./../../assets/imgs/tracy-thomas-56810-unsplash.jpg');
+    background-image: url('./../../assets/imgs/tracy-thomas-56810-unsplash.jpg');
     background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-position: center center; 
     display: flex; 
     flex-direction: column;
     justify-content: center;
@@ -20,14 +23,12 @@ page-welcome {
   }
 
   .button-login {
-    background-color: green;
     justify-content: center;
     align-items: center;
     
   }
 
   .button-signup {
-    background-color: red;
     justify-content: center;
     align-items: center;
   }

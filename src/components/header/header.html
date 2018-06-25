@@ -1,4 +1,4 @@
-<ion-navbar>
+<ion-navbar class="dt-nav-bar force-back-button" [ngClass]="{'dt-nav-bar-not-ios': !isIOS()}">
   <button ion-button menuToggle class="menu-button">
     <ion-icon name="menu"></ion-icon>
   </button>

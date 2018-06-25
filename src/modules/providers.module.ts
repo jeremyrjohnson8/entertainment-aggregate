@@ -1,19 +1,15 @@
-import { TabShellComponent } from './../components/tab-shell/tab-shell';
+import { LoginProvider } from './../providers/login-provider/login-provider';
 import { IonicModule } from 'ionic-angular';
-
-import { HeaderComponent } from '../components/header/header';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { createTranslateLoader } from '../app/app.module';
 import { HttpClient } from '@angular/common/http';
-import { CardsPage } from '../components/cards/cards';
 
 
 @NgModule({
   declarations: [
-    HeaderComponent,
-    TabShellComponent
+    
     ],
   imports: [
     IonicModule,
@@ -27,13 +23,11 @@ import { CardsPage } from '../components/cards/cards';
       }),
   ],
   exports: [
-   HeaderComponent,
-   TabShellComponent
   ],
   entryComponents: [
-    // This is for dynamically added components that are added using ViewContainerRef.createComponent() (https://stackoverflow.com/questions/39756192/what-is-entrycomponents-in-angular-ngmodule)
-   
+    
   ],
+  providers: [LoginProvider],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
 })
-export class ComponentsModule {}
+export class ProvidersModule {}

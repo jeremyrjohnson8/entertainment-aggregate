@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController } from 'ionic-angular';
-import { Tab1Root, Tab2Root, Tab3Root } from '../../constants/page.constants';
+import { NavController } from 'ionic-angular';
+import { LIST_MASTER_PAGE_TAB, SETTINGS_PAGE_TAB, SEARCH_PAGE_TAB } from '../../constants/page.constants';
 
 
-@IonicPage()
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root: any = Tab1Root;
-  tab2Root: any = Tab2Root;
-  tab3Root: any = Tab3Root;
+  tab1Root: any = LIST_MASTER_PAGE_TAB;
+  tab2Root: any = SEARCH_PAGE_TAB;
+  tab3Root: any = SETTINGS_PAGE_TAB;
 
   tab1Title = " ";
   tab2Title = " ";

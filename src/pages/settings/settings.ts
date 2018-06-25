@@ -10,7 +10,6 @@ import { Settings } from '../../providers';
  * to enable the user to customize settings for the app.
  *
  */
-@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
