@@ -1,4 +1,3 @@
-import { TabsPage } from './../pages/tabs/tabs';
 import { SignupPage } from './../pages/signup/signup';
 import { LoginPage } from './../pages/login/login';
 import { WelcomePage } from './../pages/welcome/welcome';
@@ -14,6 +13,7 @@ import { ListMasterPage } from '../pages/list-master/list-master';
 import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
 import { CardsPage } from '../components/cards/cards';
+import { TabsPage } from '../pages/tabs/tabs';
 
 
 @NgModule({
@@ -21,11 +21,11 @@ import { CardsPage } from '../components/cards/cards';
     WelcomePage,
     LoginPage,
     SignupPage,
-    TabsPage,
     ListMasterPage,
     SettingsPage,
     SearchPage,
-    CardsPage
+    CardsPage,
+    TabsPage
   ],
   imports: [
     CommonModule,
@@ -47,11 +47,11 @@ import { CardsPage } from '../components/cards/cards';
     WelcomePage,
     LoginPage,
     SignupPage,
-    TabsPage,
     ListMasterPage,
     SettingsPage,
     SearchPage,
-    CardsPage
+    CardsPage,
+    TabsPage
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

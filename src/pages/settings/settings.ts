@@ -80,12 +80,12 @@ export class SettingsPage {
       this.pageTitle = res;
     })
 
-    this.settings.load().then(() => {
-      this.settingsReady = true;
-      this.options = this.settings.allSettings;
+    // this.settings.load().then(() => {
+    //   this.settingsReady = true;
+    //   this.options = this.settings.allSettings;
 
-      this._buildForm();
-    });
+    //   this._buildForm();
+    // });
   }
 
   ngOnChanges() {

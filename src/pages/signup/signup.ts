@@ -1,9 +1,9 @@
+import { IFirebaseUserObject } from './../../interfaces/firebase/firebase-typings';
+import { LoginProvider } from './../../providers/login-provider/login-provider';
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NavController, ToastController } from 'ionic-angular';
-
-import { User } from '../../providers';
-import { TABS_PAGE } from '../../constants/page.constants';
+import { NavController } from 'ionic-angular';
+import { Notifications } from '../../providers/notification-provider/notification';
 
 
 
@@ -25,30 +25,22 @@ export class SignupPage {
   private signupErrorString: string;
 
   constructor(public navCtrl: NavController,
-    public user: User,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
+    public notifications: Notifications,
+    public translateService: TranslateService,
+    public loginProvider: LoginProvider) {
 
     this.translateService.get('SIGNUP_ERROR').subscribe((value) => {
       this.signupErrorString = value;
     })
   }
 
-  doSignup() {
+  public async doSignup() {
     // Attempt to login in through our User service
-    this.user.signup(this.account).subscribe((resp) => {
-      this.navCtrl.push(TABS_PAGE);
-    }, (err) => {
+    try {
+      this.loginProvider.signUpWithEmailAndPassword({ displayName: ``, photoURL: ``, email: ``, password: `` } as IFirebaseUserObject);
 
-      this.navCtrl.push(TABS_PAGE);
-
-      // Unable to sign up
-      let toast = this.toastCtrl.create({
-        message: this.signupErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
-    });
+    } catch (error) {
+      this.notifications.showToast(this.signupErrorString);
+    }
   }
 }

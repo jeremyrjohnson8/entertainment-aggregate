@@ -7,32 +7,43 @@
 </ion-header>
 
 <ion-content>
-  <form (submit)="doLogin()">
-    <ion-list>
+  <div class="page-container">
+    <form *ngIf="loginFormGroup" class="form-container" [formGroup]="loginFormGroup"> 
+      <ion-list>
 
-      <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
-      </ion-item>
+        <div class="form-inputs-container">
 
-      <!--
-      Want to use a Username instead of an Email? Here you go:
+          <div class="form-inputs">
+            <ion-item>
+              <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
+              <ion-input formControlName="email" type="email" [(ngModel)]="account.email" name="email"></ion-input>
+            </ion-item>
+            <!--             
+            Want to use a Username instead of an Email? Here you go:
 
-      <ion-item>
-        <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
-        <ion-input tplype="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
+            <ion-item>
+              <ion-label floating>{{ 'USERNAME' | translate }}</ion-label>
+              <ion-input tplype="text" [(ngModel)]="account.username" name="username"></ion-input>
+            </ion-item> -->
 
-      <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
-      </ion-item>
+            <ion-item>
+              <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
+              <ion-input formControlName="password" type="password" [(ngModel)]="account.password" name="password"></ion-input>
+            </ion-item>
+          </div>
+        </div>
 
-      <div padding>
-        <button ion-button color="primary" block>{{ 'LOGIN_BUTTON' | translate }}</button>
-      </div>
+        <div class="button-container">
+          <div class="button">
+            <button ion-button color="primary" (click)="doLogin()" [disabled]="loginFormGroup.invalid" block>{{ 'LOGIN_BUTTON' | translate }}</button>
+          </div>
 
-    </ion-list>
-  </form>
+          <div class="button">
+            <button ion-button block class="button" (click)="navigateToSignup()"> Sign Up </button>
+          </div>
+        </div>
+      </ion-list>
+    </form>
+  </div>
+
 </ion-content>

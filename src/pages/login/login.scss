@@ -1,2 +1,54 @@
 page-login {
+    .page-container {
+        width: auto; 
+        height: 100vh;
+        background-image: url('./../../assets/imgs/tracy-thomas-56810-unsplash.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment:fixed;
+        background-position: center center; 
+        align-items: baseline;
+        
+      }
+
+      .form-container {
+        display: flex; 
+        justify-content: center;
+        flex-direction: column;
+        height: 100%;
+      }
+
+      .form-inputs-container {
+        display: flex; 
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+      }
+
+      .form-inputs {
+        justify-content: center;
+        align-items: center;
+        width: 60vw;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        flex-basis: 50%;
+        width: 100vw;
+        justify-content: center;
+      }
+    
+      .button {
+        width: 30vw; 
+        height: 5vh;
+        margin: 0.5rem;
+        align-content: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    
 }

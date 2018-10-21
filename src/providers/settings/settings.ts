@@ -13,21 +13,20 @@ export class Settings {
   _defaults: any;
   _readyPromise: Promise<any>;
 
-  constructor(public storage: Storage, defaults: any) {
-    this._defaults = defaults;
+  constructor() {
   }
 
   load() {
-    return this.storage.get(this.SETTINGS_KEY).then((value) => {
-      if (value) {
-        this.settings = value;
-        return this._mergeDefaults(this._defaults);
-      } else {
-        return this.setAll(this._defaults).then((val) => {
-          this.settings = val;
-        })
-      }
-    });
+    // return this.storage.get(this.SETTINGS_KEY).then((value) => {
+    //   if (value) {
+    //     this.settings = value;
+    //     return this._mergeDefaults(this._defaults);
+    //   } else {
+    //     return this.setAll(this._defaults).then((val) => {
+    //       this.settings = val;
+    //     })
+    //   }
+    // });
   }
 
   _mergeDefaults(defaults: any) {
@@ -47,19 +46,19 @@ export class Settings {
   }
 
   setValue(key: string, value: any) {
-    this.settings[key] = value;
-    return this.storage.set(this.SETTINGS_KEY, this.settings);
+    // this.settings[key] = value;
+    // return this.storage.set(this.SETTINGS_KEY, this.settings);
   }
 
   setAll(value: any) {
-    return this.storage.set(this.SETTINGS_KEY, value);
+    // return this.storage.set(this.SETTINGS_KEY, value);
   }
 
   getValue(key: string) {
-    return this.storage.get(this.SETTINGS_KEY)
-      .then(settings => {
-        return settings[key];
-      });
+    // return this.storage.get(this.SETTINGS_KEY)
+    //   .then(settings => {
+    //     return settings[key];
+    //   });
   }
 
   save() {

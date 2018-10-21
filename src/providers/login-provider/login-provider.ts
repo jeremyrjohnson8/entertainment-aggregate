@@ -1,8 +1,11 @@
+import { MemoryStoreProvider } from './../memory-store/memory-store';
 import { IFirebaseUser } from './../../interfaces/firebase-user-interface';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
+import { User } from '../../models/user-model';
+import { IFirebaseUserObject } from '../../interfaces/firebase/firebase-typings';
 
 /*
   Generated class for the LoginProvider provider.
@@ -14,48 +17,68 @@ import firebase from 'firebase';
 export class LoginProvider {
 
   constructor(public http: HttpClient,
-    public af: AngularFireAuth) {
+    public af: AngularFireAuth,
+    public memoryStoreProvider: MemoryStoreProvider) {
   }
 
   /**
    * googleLogin
    */
-  public async googleLogin() : Promise<void> {
+  public async googleLogin(): Promise<void> {
     let provider = new firebase.auth.GoogleAuthProvider();
-    let response = await this.af.auth.signInWithPopup(provider).then((result: IFirebaseUser) => {
-      // This gives you a Google Access Token. You can use it to access the Google API
-      if (result.credential) {
-        let providerId  = result.credential.providerId;
-        // The signed-in user info.
-        let user = result.user;
-      }
-    }).catch((errorResponse: any) => {
-      // Handle Errors here.
-      let errorCode = errorResponse.code;
-      let errorMessage = errorResponse.message;
+    let result: IFirebaseUser = await this.af.auth.signInWithPopup(provider);
+    console.log(result);
+    
+    // .then((result: IFirebaseUser) => {
+    //   // This gives you a Google Access Token. You can use it to access the Google API
+    //   if (result.credential) {
+    //     let providerId = result.credential.providerId;
+    //     // The signed-in user info.
+    //     let user = result.user;
+    //   }
+    // }).catch((errorResponse: any) => {
+    //   // Handle Errors here.
+    //   let errorCode = errorResponse.code;
+    //   let errorMessage = errorResponse.message;
 
-      if (errorCode === 'auth/operation-not-allowed') {
-        alert('You must enable Anonymous auth in the Firebase Console.');
-      } else {
-        console.error(errorResponse);
-      }
-    });
+    //   if (errorCode === 'auth/operation-not-allowed') {
+    //     alert('You must enable Anonymous auth in the Firebase Console.');
+    //   } else {
+    //     console.error(errorResponse);
+    //   }
+    // });
 
   }
 
+  public async signUpWithEmailAndPassword(firebaseUO: IFirebaseUserObject): Promise<User> {
+    try {
+      let authUser: IFirebaseUser = await this.af.auth.createUserWithEmailAndPassword(firebaseUO.email, firebaseUO.password);
+      let fbUser = authUser.user;
+      fbUser.displayName = firebaseUO.displayName;
+      await this.af.auth.updateCurrentUser(fbUser);
+      return this.buildUserModel(authUser);;
+    } catch (err) {
+      Promise.reject(err);
+    }
+  }
 
-  public async doLogin(email: string, pass: string): Promise<boolean> {
+  public async doLogin(email: string, pass: string): Promise<User> {
 
     if (!email || !pass) {
-      return undefined;
+      Promise.resolve(undefined);
     }
-
-
-    this.af.auth.signInWithEmailAndPassword(email, pass).then().catch();
-
-
-
-    return null;
+    let userAuth = {} as IFirebaseUser;
+    try {
+      userAuth = await this.af.auth.signInWithEmailAndPassword(email, pass).then();
+      let userModel = this.buildUserModel(userAuth);
+      return userModel;
+    } catch (error) {
+      Promise.reject(error);
+    }
   }
 
+  private buildUserModel(userResponse: IFirebaseUser): User {
+    if (!userResponse) return new User(null);
+    return new User(userResponse);
+  }
 }

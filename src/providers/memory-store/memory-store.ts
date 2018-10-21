@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -13,11 +12,11 @@ export class MemoryStoreProvider {
   private _loginMemoryData: any;
 
 
-  constructor(public http: HttpClient) {
+  constructor() {
   }
 
 
-  public loginMemoryData(): any {
+  public loginMemoryData(): any { 
     if (!this._loginMemoryData) {
       this._loginMemoryData = {}; 
     }

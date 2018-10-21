@@ -1,3 +1,4 @@
+import { LOGIN_PAGE } from './../constants/page.constants';
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -11,7 +12,7 @@ import { WELCOME_PAGE } from '../constants/page.constants';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = WELCOME_PAGE;
+  rootPage = LOGIN_PAGE;
 
   @ViewChild(Nav) nav: Nav;
 
@@ -70,7 +71,7 @@ export class MyApp {
   openPage() {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(WELCOME_PAGE);
+    this.nav.setRoot(LOGIN_PAGE);
   }
 
   checkAuthStatus(): void {
