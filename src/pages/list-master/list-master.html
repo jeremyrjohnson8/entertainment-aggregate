@@ -13,23 +13,25 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar #box (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" autoCorrect="on" (keyup.enter)="searchMovie(box.value)"></ion-searchbar>
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of currentItems">
-      <button ion-item (click)="openItem(item)">
-        <ion-avatar item-start>
-          <img [src]="item.profilePic" />
+  <ion-searchbar #box (ionInput)="getItems($event)" (ionClear)="resetList($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" autoCorrect="on"></ion-searchbar>
+  <!-- <ion-list> -->
+    <ion-item-sliding class="list-item" *ngFor="let movie of movieList">
+      <button ion-item (click)="openItem(movie)">
+        <ion-avatar class="ion-avatar" item-start>
+          <img [src]="movie.Poster" />
         </ion-avatar>
-        <h2>{{item.name}}</h2>
-        <p>{{item.about}}</p>
-        <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+        <h2>{{movie.title}}</h2>
+        <p>{{movie.Director}}</p>
+        <p>{{movie.Actors}}</p>
+        <ion-note item-end *ngIf="movie.Rated">{{movie.Rated}}</ion-note>
+
       </button>
 
       <ion-item-options>
-        <button ion-button color="danger" (click)="deleteItem(item)">
+        <button ion-button color="danger" (click)="deleteItem(movie)">
           {{ 'DELETE_BUTTON' | translate }}
         </button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  <!-- </ion-list> -->
 </ion-content>

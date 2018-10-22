@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login-provider/login-provider';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { User } from '../../models/user-model';
+import { UserModel } from '../../models/user-model';
 import { Notifications } from '../../providers/notification-provider/notification';
 
 
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit {
   public loginFormGroup: FormGroup;
   public loginEmail: string;
   public loginPassword: string;
-  public userModel: User;
+  public userModel: UserModel;
 
   constructor(public navCtrl: NavController,
     public loginFormBuilder: FormBuilder,
@@ -43,8 +43,8 @@ export class LoginPage implements OnInit {
   public async doLogin(): Promise<void> {
     this.notifications.presentLoader();
     try {
-      this.userModel = await this.loginProvider.doLogin(this.account.email, this.account.password);
-      console.log(this.userModel.email);
+      await this.loginProvider.doLogin(this.account.email, this.account.password);
+      // console.log(this.userModel.email);
       this.notifications.dismissLoader();
       this.notifications.showToast(`Success Login`);
       this.navCtrl.setRoot(TABS_PAGE);

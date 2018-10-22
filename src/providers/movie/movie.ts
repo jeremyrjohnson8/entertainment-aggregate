@@ -1,7 +1,9 @@
+import { MemoryStoreProvider } from './../memory-store/memory-store';
+import { OMDBApiDto } from './../../models/OmdbApiDto';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OMDBApiDto } from '../../models/OmdbApiDto';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { UserModel } from '../../models/user-model';
 
 /*
   Generated class for the MovieProvider provider.
@@ -12,55 +14,70 @@ import { AngularFirestore } from 'angularfire2/firestore';
 @Injectable()
 export class MovieProvider {
 
-  constructor(public http: HttpClient, public db: AngularFirestore) {
-    console.log('Hello MovieProvider Provider');
-  }
-
-  public addMovieToCollection(movie: OMDBApiDto, uid: string): Promise<void> {
-    let adjustedTitle = movie.title.replace(/ /g, "+");
-    let movieData = this.mapMovieDataToGeneric(movie);
-    return null;
-}
-
-public addMovieToDatabase(movie: OMDBApiDto) : void {
-    let movieData = this.mapMovieDataToGeneric(movie);
-    let adjustedTitle = movie.title.replace(/ /g, "+");
-    this.db.collection(`/moviedb/`).doc(adjustedTitle).set(movieData); 
-}
-
-
-private mapMovieDataToGeneric(movie: OMDBApiDto): object {
-
-    if (movie) {
-        let data = { 
-            title: movie.title,
-            Year: movie.Year,
-            Rated: movie.Rated,
-            Released: movie.Released,
-            Runtime: movie.Runtime,
-            Genre: movie.Genre,
-            Director: movie.Director,
-            Writer: movie.Writer,
-            Actors: movie.Actors,
-            Plot: movie.Plot,
-            Language: movie.Language,
-            Country: movie.Country,
-            Poster: movie.Poster,
-            Ratings: movie.Ratings,
-            Metascore: movie.Metascore,
-            imdbVotes: movie.imdbVotes,
-            imdbID: movie.imdbID,
-            Type: movie.Type,
-            DVD: movie.DVD,
-            BoxOffice: movie.BoxOffice,
-            Production: movie.Production,
-            Website: movie.Website,
-            Response: movie.Response,
-        }
-        return data;
+    private user: UserModel;
+    constructor(public http: HttpClient, public db: AngularFireDatabase, public memoryStoreProvider: MemoryStoreProvider) {
+        this.user = this.memoryStoreProvider.loginMemoryData().data;
     }
-    return {};
 
-}
+
+
+    public async addMovieToCollection(movie: OMDBApiDto): Promise<void> {
+        let adjustedTitle = movie.title.replace(/ /g, "+");
+        let movieData = this.mapMovieDataToGeneric(movie);
+        await this.db.list(`/movie/${this.user.uid}`).set(adjustedTitle, movieData);
+    }
+
+    public async addMovieToDatabase(movie: OMDBApiDto): Promise<void> {
+        let movieData = this.mapMovieDataToGeneric(movie);
+        let adjustedTitle = movie.title.replace(/ /g, "+");
+        await this.db.list(`/moviedb/`).set(adjustedTitle, movieData);
+    }
+
+    public async getMovieFromMainDBByTitle(title: string): Promise<OMDBApiDto> {
+        let adjustedTitle = title.replace(/ /g, "+");
+        let snapshot = await this.db.object(`/moviedb/${adjustedTitle}`).valueChanges().take(1).toPromise() as OMDBApiDto;
+        return snapshot;
+    }
+
+    public async getMoviesByUser(): Promise<OMDBApiDto[]> {
+        let userMovieList =  await this.db.list(`/movie/${this.user.uid}`).valueChanges().take(1).toPromise() as OMDBApiDto[];
+        this.memoryStoreProvider.movieListMemoryData().publish(userMovieList); 
+        return userMovieList;
+    }
+
+
+    private mapMovieDataToGeneric(movie: OMDBApiDto): object {
+
+        if (movie) {
+            let data = {
+                title: movie.title,
+                Year: movie.Year,
+                Rated: movie.Rated,
+                Released: movie.Released,
+                Runtime: movie.Runtime,
+                Genre: movie.Genre,
+                Director: movie.Director,
+                Writer: movie.Writer,
+                Actors: movie.Actors,
+                Plot: movie.Plot,
+                Language: movie.Language,
+                Country: movie.Country,
+                Poster: movie.Poster,
+                Ratings: movie.Ratings,
+                Metascore: movie.Metascore,
+                imdbVotes: movie.imdbVotes,
+                imdbID: movie.imdbID,
+                Type: movie.Type,
+                DVD: movie.DVD,
+                BoxOffice: movie.BoxOffice,
+                Production: movie.Production,
+                Website: movie.Website,
+                Response: movie.Response,
+            }
+            return data;
+        }
+        return {};
+
+    }
 
 }

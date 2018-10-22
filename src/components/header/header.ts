@@ -1,6 +1,6 @@
 import { Component, Input, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Platform, Navbar, NavController } from 'ionic-angular';
-import { User } from '../../models/user-model';
+import { UserModel } from '../../models/user-model';
 import { Subject } from 'rxjs/Subject';
 /**
  * Generated class for the HeaderComponent component.
@@ -19,7 +19,7 @@ export class HeaderComponent {
   @ViewChild(Navbar) navBar: Navbar;
 
   public unsubscribe = new Subject<void>();
-  public user: User;
+  public user: UserModel;
   constructor(public navCtrl: NavController,
     private platform: Platform) {
   }

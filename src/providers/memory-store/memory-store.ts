@@ -1,4 +1,9 @@
+import { LoginMemoryData } from './../../models/login-memory-data';
+import { User } from './../user/user';
 import { Injectable } from '@angular/core';
+import { GenericMemoryData } from '../../models/memory-store/memory-store-data-model';
+import { UserModel } from '../../models/user-model';
+import { OMDBApiDto } from '../../models/OmdbApiDto';
 
 /*
   Generated class for the MemoryStoreProvider provider.
@@ -9,18 +14,25 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MemoryStoreProvider {
 
-  private _loginMemoryData: any;
+  private _loginMemoryData: LoginMemoryData;
 
+  private _movieMemoryData: GenericMemoryData<OMDBApiDto[]>;
 
   constructor() {
   }
 
 
-  public loginMemoryData(): any { 
+  public loginMemoryData(): LoginMemoryData { 
     if (!this._loginMemoryData) {
-      this._loginMemoryData = {}; 
+      this._loginMemoryData = new LoginMemoryData(); 
     }
     return this._loginMemoryData;
   }
 
+  public movieListMemoryData(): GenericMemoryData<OMDBApiDto[]> { 
+    if (!this._movieMemoryData) {
+      this._movieMemoryData = new GenericMemoryData<OMDBApiDto[]>(); 
+    }
+    return this._movieMemoryData;
+  }
 }

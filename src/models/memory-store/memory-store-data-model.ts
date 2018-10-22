@@ -1,5 +1,7 @@
 import { IMemoryStoreData } from './../../interfaces/memory-store-types';
 import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
+
 
 export class GenericMemoryData<T> implements IMemoryStoreData {
 

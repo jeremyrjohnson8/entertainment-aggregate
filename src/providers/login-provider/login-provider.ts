@@ -4,7 +4,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase';
-import { User } from '../../models/user-model';
+import { UserModel } from '../../models/user-model';
 import { IFirebaseUserObject } from '../../interfaces/firebase/firebase-typings';
 
 /*
@@ -50,7 +50,7 @@ export class LoginProvider {
 
   }
 
-  public async signUpWithEmailAndPassword(firebaseUO: IFirebaseUserObject): Promise<User> {
+  public async signUpWithEmailAndPassword(firebaseUO: IFirebaseUserObject): Promise<UserModel> {
     try {
       let authUser: IFirebaseUser = await this.af.auth.createUserWithEmailAndPassword(firebaseUO.email, firebaseUO.password);
       let fbUser = authUser.user;
@@ -62,7 +62,7 @@ export class LoginProvider {
     }
   }
 
-  public async doLogin(email: string, pass: string): Promise<User> {
+  public async doLogin(email: string, pass: string): Promise<void> {
 
     if (!email || !pass) {
       Promise.resolve(undefined);
@@ -70,15 +70,14 @@ export class LoginProvider {
     let userAuth = {} as IFirebaseUser;
     try {
       userAuth = await this.af.auth.signInWithEmailAndPassword(email, pass).then();
-      let userModel = this.buildUserModel(userAuth);
-      return userModel;
+      this.memoryStoreProvider.loginMemoryData().publish(userAuth); 
     } catch (error) {
       Promise.reject(error);
     }
   }
 
-  private buildUserModel(userResponse: IFirebaseUser): User {
-    if (!userResponse) return new User(null);
-    return new User(userResponse);
+  private buildUserModel(userResponse: IFirebaseUser): UserModel {
+    if (!userResponse) return new UserModel(null);
+    return new UserModel(userResponse);
   }
 }

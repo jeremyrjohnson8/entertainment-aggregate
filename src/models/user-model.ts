@@ -1,19 +1,24 @@
 import { IFirebaseUser } from './../interfaces/firebase-user-interface';
-export class  User {
+export class  UserModel {
 
     displayname: string;
     email: string;
+    uid: string;
 
-    constructor(userResponse: IFirebaseUser) {
+    public constructor(userResponse: IFirebaseUser) {
         
         if (!userResponse) 
         {
             this.email = ``;
             this.displayname = ``;
+            this.uid = ``; 
             return;
         }
        this.email = userResponse.user.email;
        this.displayname = userResponse.user.displayName;
+       this.uid = userResponse.user.uid;
+
+
     }
 
 }
