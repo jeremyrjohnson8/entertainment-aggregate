@@ -1,6 +1,8 @@
+import { MoviePlatformEnum } from './../enums/platforms';
 import { IOMDBApi } from "../interfaces/IOMDBApiDTO";
 
 export class OMDBApiDto {
+
     public title: string;
     public Year: string;
     public Rated: string;
@@ -24,11 +26,11 @@ export class OMDBApiDto {
     public Production: string;
     public Website: string;
     public Response: string;
+    public platform: MoviePlatformEnum; 
     public errorOccurred: boolean;
     public errorMessage: string;
 
      constructor(omdbResult?: IOMDBApi) {
-        console.log(`Omdb result to be mapped ${omdbResult}`);
         this.title = omdbResult && omdbResult.Title || "";
         this.Year = omdbResult && omdbResult.Year || "";
         this.Rated = omdbResult && omdbResult.Rated || "";

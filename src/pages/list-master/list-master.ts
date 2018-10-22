@@ -51,7 +51,10 @@ export class ListMasterPage implements OnInit {
       .subscribe((value: OMDBApiDto[]) => {
         if (this.originalList) {
           this.originalList = [];
-          value.map(e => this.originalList.push(e));
+          console.log(`Fired in sub`);
+          this.movieList = value;
+          this.originalList = value;
+          
         }
       });
   }
@@ -122,8 +125,5 @@ export class ListMasterPage implements OnInit {
   public resetList($event = null): void {
     this.query(null);
   }
-  public async searchMovie(searchTerm: string): Promise<void> {
-
-    await this.api.getMovieByTitle(searchTerm);
-  }
+  
 }

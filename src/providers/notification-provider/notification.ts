@@ -19,7 +19,7 @@ export class Notifications {
     showToast(displayable: string): void {
         let toast = this.toast.create({
             message: displayable,
-            duration: 2500,
+            duration: 1500,
             position: `Top`,
             showCloseButton: true
         });

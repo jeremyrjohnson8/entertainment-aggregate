@@ -8,15 +8,54 @@
 
 
 <ion-content>
-  <ion-searchbar (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
-  <ion-list>
-    <button ion-item (click)="openItem(item)" *ngFor="let item of currentItems">
-      <ion-avatar item-start>
-        <img [src]="item.profilePic" />
-      </ion-avatar>
-      <h2>{{item.name}}</h2>
-      <p>{{item.about}}</p>
-      <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
-    </button>
-  </ion-list>
+  <ion-searchbar #box (keyup.enter)="searchMovie(box.value)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"></ion-searchbar>
+  <div *ngIf="currentMovie">
+    <div class="movie-container">
+      <div class="movie-details">
+        <div class="left-movie-details">
+          <div class="movie-title">
+            <h1>Title</h1>
+            <span>
+              {{currentMovie.title}}
+            </span>
+          </div>
+          <div class="movie-title">
+            <h2>Director</h2>
+            <span>
+              {{currentMovie.Director}}
+            </span>
+          </div>
+          <div class="movie-title">
+            <h2>Year</h2>
+            <span>
+              {{currentMovie.Year}}
+            </span>
+          </div>
+          <div>
+            <h2>Plot</h2>
+            <p>
+              {{currentMovie.Plot}}
+            </p>
+          </div>
+        </div>
+        <div class="right-movie-details">
+          <div class="movie-poster">
+            <img [src]="currentMovie.Poster">
+          </div>
+        </div>
+      </div>
+      <ion-select interface="{{getSelectInterface()}}" class="select-platform-type" [placeholder]="'Select Movie Platform'">
+        <ion-option *ngFor='let platformsIterated of platforms; let index = index' (ionSelect)="setMoviePlatform(platformsIterated)" [value]="platformsIterated">
+          <span >{{platformsIterated.displayable}}</span>
+        </ion-option>
+      </ion-select>
+
+      <button ion-button block (click)="addMovieToCollection()" [disabled]="!currentPlatform">
+        <span>
+          Add Movie to collection?
+        </span>
+      </button>
+    </div>
+
+  </div>
 </ion-content>
