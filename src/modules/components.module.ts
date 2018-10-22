@@ -1,3 +1,4 @@
+import { MovieCardComponent } from './../components/movie-card/movie-card';
 import { TabShellComponent } from './../components/tab-shell/tab-shell';
 import { IonicModule } from 'ionic-angular';
 
@@ -13,7 +14,8 @@ import { CardsPage } from '../components/cards/cards';
 @NgModule({
   declarations: [
     HeaderComponent,
-    TabShellComponent
+    TabShellComponent,
+    MovieCardComponent
     ],
   imports: [
     IonicModule,

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OMDBApiDto } from '../../models/OmdbApiDto';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 /*
   Generated class for the MovieProvider provider.
@@ -11,23 +12,20 @@ import { OMDBApiDto } from '../../models/OmdbApiDto';
 @Injectable()
 export class MovieProvider {
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public db: AngularFirestore) {
     console.log('Hello MovieProvider Provider');
   }
 
   public addMovieToCollection(movie: OMDBApiDto, uid: string): Promise<void> {
     let adjustedTitle = movie.title.replace(/ /g, "+");
-
     let movieData = this.mapMovieDataToGeneric(movie);
     return null;
 }
 
 public addMovieToDatabase(movie: OMDBApiDto) : void {
-    debugger;
     let movieData = this.mapMovieDataToGeneric(movie);
     let adjustedTitle = movie.title.replace(/ /g, "+");
-
-   // this.db.collection(`/moviedb/`).doc(adjustedTitle).set(movieData); 
+    this.db.collection(`/moviedb/`).doc(adjustedTitle).set(movieData); 
 }
 
 

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
+import { OmdbApiProvider } from '../../providers/omdb-api/omdb-api';
 
 
 @Component({
@@ -12,7 +13,7 @@ import { Items } from '../../providers';
 export class ListMasterPage {
   currentItems: Item[];
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public api: OmdbApiProvider) {
     this.currentItems = this.items.query();
   }
 
@@ -20,6 +21,7 @@ export class ListMasterPage {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+    
   }
 
   /**
@@ -50,5 +52,25 @@ export class ListMasterPage {
     this.navCtrl.push('ItemDetailPage', {
       item: item
     });
+  }
+
+  /**
+   * Perform a service for the proper items.
+   */
+  getItems(ev) {
+    let val = ev.target.value;
+    if (!val || !val.trim()) {
+      this.currentItems = [];
+      return;
+    }
+    this.currentItems = this.items.query({
+      name: val
+    });
+  }
+
+
+  public async searchMovie(searchTerm: string) : Promise<void> {
+
+    await this.api.getMovieByTitle(searchTerm); 
   }
 }

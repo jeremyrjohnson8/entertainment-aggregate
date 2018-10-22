@@ -4,9 +4,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
-
+// import { Observable } from 'rxjs/Observable';
 import { Settings } from '../providers';
 import { WELCOME_PAGE } from '../constants/page.constants';
+// import 'rxjs/add/operator/mapTo';
+// import { of } from 'rxjs';
 
 @Component({
   templateUrl: 'app.html'

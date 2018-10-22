@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-searchbar #box (ionInput)="getItems($event)" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}" autoCorrect="on" (keyup.enter)="searchMovie(box.value)"></ion-searchbar>
   <ion-list>
     <ion-item-sliding *ngFor="let item of currentItems">
       <button ion-item (click)="openItem(item)">
