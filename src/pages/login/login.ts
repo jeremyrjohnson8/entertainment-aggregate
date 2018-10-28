@@ -1,7 +1,7 @@
 import { SIGN_UP_PAGE, TABS_PAGE } from './../../constants/page.constants';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { LoginProvider } from '../../providers/login-provider/login-provider';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../models/user-model';

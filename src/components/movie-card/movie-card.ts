@@ -1,8 +1,8 @@
 import { MovieProvider } from './../../providers/movie/movie';
 import { Notifications } from './../../providers/notification-provider/notification';
 import { OMDBApiDto } from './../../models/OmdbApiDto';
-import { Component, Input } from '@angular/core';
-import { ViewController, NavController, NavParams, ModalController, AlertController } from 'ionic-angular';
+import { Component } from '@angular/core';
+import { ViewController, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PlatformUtil } from '../../utils/platform-util';
 import { MoviePlatform } from '../../pages/search/search';
 import { MoviePlatformEnum } from '../../enums/platforms';

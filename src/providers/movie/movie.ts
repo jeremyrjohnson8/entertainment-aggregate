@@ -1,4 +1,3 @@
-import { MoviePlatform } from './../../pages/search/search';
 import { MemoryStoreProvider } from './../memory-store/memory-store';
 import { OMDBApiDto } from './../../models/OmdbApiDto';
 import { HttpClient } from '@angular/common/http';

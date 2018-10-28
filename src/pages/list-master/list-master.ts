@@ -1,13 +1,12 @@
 import { Notifications } from './../../providers/notification-provider/notification';
 import { OMDBApiDto } from './../../models/OmdbApiDto';
 import { MovieProvider } from './../../providers/movie/movie';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
-import { Item } from '../../models/item';
 import { Items } from '../../providers';
 import { OmdbApiProvider } from '../../providers/omdb-api/omdb-api';
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import 'rxjs/add/operator/takeUntil';
 import { MovieCardComponent } from '../../components/movie-card/movie-card';
 
@@ -133,7 +132,7 @@ export class ListMasterPage implements OnInit {
     });
   }
 
-  public resetList($event = null): void {
+  public resetList(): void {
     this.query(null);
   }
   

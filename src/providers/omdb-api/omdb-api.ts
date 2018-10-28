@@ -5,7 +5,6 @@ import { HttpClient } from '@angular/common/http';
 import { IOMDBApi } from '../../interfaces/IOMDBApiDTO';
 import { MovieProvider } from '../movie/movie';
 import { OMDBApiDto } from '../../models/OmdbApiDto';
-import { async } from 'rxjs/internal/scheduler/async';
 
 /*
   Generated class for the OmdbApiProvider provider.

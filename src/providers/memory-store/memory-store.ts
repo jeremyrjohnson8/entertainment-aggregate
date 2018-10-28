@@ -1,8 +1,6 @@
 import { LoginMemoryData } from './../../models/login-memory-data';
-import { User } from './../user/user';
 import { Injectable } from '@angular/core';
 import { GenericMemoryData } from '../../models/memory-store/memory-store-data-model';
-import { UserModel } from '../../models/user-model';
 import { OMDBApiDto } from '../../models/OmdbApiDto';
 
 /*

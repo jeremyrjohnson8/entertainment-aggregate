@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 // import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams } from 'ionic-angular';
 
 import { Settings } from '../../providers';
 
@@ -58,7 +58,7 @@ export class SettingsPage {
     this.form = this.formBuilder.group(group);
 
     // Watch the form for changes, and
-    this.form.valueChanges.subscribe((v) => {
+    this.form.valueChanges.subscribe(() => {
       this.settings.merge(this.form.value);
     });
   }

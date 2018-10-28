@@ -8,7 +8,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { createTranslateLoader } from '../app/app.module';
 import { HttpClient } from '@angular/common/http';
-import { CardsPage } from '../components/cards/cards';
 
 
 @NgModule({

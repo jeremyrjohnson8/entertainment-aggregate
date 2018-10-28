@@ -1,4 +1,4 @@
-import { Component, Input, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { Platform, Navbar, NavController } from 'ionic-angular';
 import { UserModel } from '../../models/user-model';
 import { Subject } from 'rxjs/Subject';
@@ -27,7 +27,7 @@ export class HeaderComponent {
 
   ngOnInit() {
     if (this.navCtrl.parent) {
-      this.navBar.backButtonClick = (e: UIEvent) => {
+      this.navBar.backButtonClick = () => {
         this.navCtrl.parent.viewCtrl.dismiss();
         return;
       };

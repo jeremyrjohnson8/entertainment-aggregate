@@ -1,7 +1,6 @@
 import { UserModel } from "./user-model";
 import { IMemoryStoreData } from "../interfaces/memory-store-types";
 import { Subject } from "rxjs/Subject";
-import { User } from "../providers";
 import { IFirebaseUser } from "../interfaces/firebase-user-interface";
 
 
@@ -38,7 +37,7 @@ export class LoginMemoryData implements IMemoryStoreData {
     }
 
     public republish(): Promise<UserModel> {
-        return new Promise<UserModel>((resolve, reject) => {
+        return new Promise<UserModel>((resolve) => {
             this.dataSubject.next(this.data);
             resolve(this.data);
         });

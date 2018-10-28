@@ -1,4 +1,3 @@
-import { MoviePlatformEnum } from './../enums/platforms';
 import { IOMDBApi } from "../interfaces/IOMDBApiDTO";
 import { MoviePlatform } from '../pages/search/search';
 

@@ -11,7 +11,6 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { Notifications } from '../providers/notification-provider/notification';
 import { MemoryStoreProvider } from '../providers/memory-store/memory-store';
 import { OmdbApiProvider } from '../providers/omdb-api/omdb-api';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
 @NgModule({
