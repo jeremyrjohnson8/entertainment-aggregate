@@ -18,7 +18,10 @@ export class SearchPage implements OnInit {
   currentMovie: OMDBApiDto;
   platforms: MoviePlatform[];
   currentPlatform: MoviePlatform;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public api: OmdbApiProvider, public notifications: Notifications) { }
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public api: OmdbApiProvider, 
+    public notifications: Notifications) { }
 
   ngOnInit(): void {
     this.platforms = [{
@@ -62,15 +65,15 @@ export class SearchPage implements OnInit {
 
 
   public async addMovieToCollection(): Promise<void> {
-
+    await this.notifications.presentLoader();
     try {
       if (this.currentMovie && this.currentPlatform) {
         await this.api.movieProvider.addMovieToCollection(this.currentMovie, this.currentPlatform.value);
-        this.notifications.dismissLoader();
+        await this.notifications.dismissLoader();
       }
     } catch {
       this.notifications.showToast(`error occurred`);
-      this.notifications.dismissLoader();
+      await this.notifications.dismissLoader();
     }
 
   }

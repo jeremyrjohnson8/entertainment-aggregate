@@ -6,7 +6,7 @@ import { Loading, LoadingOptions, ToastController, LoadingController } from "ion
 export class Notifications {
     private loading: Loading;
     /** Default loader options */
-    private defaultLoadingOptions: LoadingOptions = {
+    private loadingOptions: LoadingOptions = {
         content: 'Loading...'
     };
 
@@ -29,7 +29,7 @@ export class Notifications {
 
     public initLoader(options?: LoadingOptions): void {
         if (!options) {
-            this.loading = this.loadingCtrl.create(this.defaultLoadingOptions);
+            this.loading = this.loadingCtrl.create(this.loadingOptions);
         } else {
             this.loading = this.loadingCtrl.create(options);
         }
@@ -39,18 +39,18 @@ export class Notifications {
         });
     }
 
-    public presentLoader(): void {
+    public async presentLoader(): Promise<void> {
         if (this.loading) {
-            this.loading.present();
+            return await this.loading.present();
         } else {
             this.initLoader();
-            this.loading.present();
+            return await this.loading.present();
         }
     }
 
-    public dismissLoader(): void {
+    public async dismissLoader(): Promise<void> {
         if (this.loading) {
-            this.loading.dismiss();
+            return await this.loading.dismiss();
         }
     }
 

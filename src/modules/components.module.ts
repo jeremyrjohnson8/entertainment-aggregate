@@ -30,9 +30,11 @@ import { CardsPage } from '../components/cards/cards';
   ],
   exports: [
    HeaderComponent,
-   TabShellComponent
+   TabShellComponent,
+   MovieCardComponent
   ],
   entryComponents: [
+    MovieCardComponent
     // This is for dynamically added components that are added using ViewContainerRef.createComponent() (https://stackoverflow.com/questions/39756192/what-is-entrycomponents-in-angular-ngmodule)
    
   ],

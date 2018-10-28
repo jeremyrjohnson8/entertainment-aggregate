@@ -10,4 +10,13 @@ page-list-master {
         max-height: 8rem !important; //any size 
         border-radius: 0% !important; 
     }
+
+    //IOS Specific Styling
+    .item-ios ion-avatar ion-img, .item-ios ion-avatar img {
+        width: auto !important;  
+        height: 9vh !important;  
+        max-width: 8rem !important;  //any size
+        max-height: 8rem !important; //any size 
+        border-radius: 0% !important; 
+    }
 }

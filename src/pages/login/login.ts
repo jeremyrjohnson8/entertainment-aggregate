@@ -41,15 +41,15 @@ export class LoginPage implements OnInit {
 
   // Attempt to login in through our User service
   public async doLogin(): Promise<void> {
-    this.notifications.presentLoader();
+    await this.notifications.presentLoader();
     try {
       await this.loginProvider.doLogin(this.account.email, this.account.password);
       // console.log(this.userModel.email);
-      this.notifications.dismissLoader();
+      await this.notifications.dismissLoader();
       this.notifications.showToast(`Success Login`);
       this.navCtrl.setRoot(TABS_PAGE);
     } catch {
-      this.notifications.dismissLoader();
+      await this.notifications.dismissLoader();
       this.notifications.showToast(`Failed Login`);
     }
   }
