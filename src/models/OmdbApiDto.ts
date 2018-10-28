@@ -1,5 +1,6 @@
 import { MoviePlatformEnum } from './../enums/platforms';
 import { IOMDBApi } from "../interfaces/IOMDBApiDTO";
+import { MoviePlatform } from '../pages/search/search';
 
 export class OMDBApiDto {
 
@@ -26,7 +27,7 @@ export class OMDBApiDto {
     public Production: string;
     public Website: string;
     public Response: string;
-    public platform: MoviePlatformEnum; 
+    public platform: MoviePlatform; 
     public errorOccurred: boolean;
     public errorMessage: string;
 

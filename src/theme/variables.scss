@@ -77,3 +77,10 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+
+/** media query min-width */
+$media-height-iphone-x: 2436px;
+$media-width-iphone-x: 1125px; 
+
+$media-height-desktop: 803px;
+$media-width-desktop: 1440px;

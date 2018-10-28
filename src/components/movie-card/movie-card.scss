@@ -1,3 +1,129 @@
 movie-card {
+    height: 100%;
+    width: 100%;
+    //mobile
+    @media screen and (max-height: $media-height-iphone-x)  {
+        .movie-modal-container{
+            height: 80vh; 
+            width: auto; 
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    //desktop
+    @media screen and (min-height: $media-height-desktop)  {
+        .movie-modal-container{
+            height: 66vh; 
+            width: auto; 
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+    }
 
+    .movie-card  ion-card {
+        height: 100%  !important;
+        position: relative;
+    }
+    .movie-details-container {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding-top: 1.5rem; 
+        margin-top: 1.5rem;
+        justify-content: space-between
+    }
+
+    .detail-container{
+        font-size: 1.7rem;
+        padding: 2% 1% 2% 5%;
+        justify-content: space-between;
+        width:100%;
+        display: flex;
+        flex-direction: column; 
+        .label{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: left;
+          font-weight: 900;
+        }
+        .value{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: left;
+        }
+      }
+
+      .movie-plot-summary {
+        font-size: 1.7rem;
+        padding: 1% 0.5% 1% 2.5%;
+        justify-content: space-between;
+        position: relative;
+        width:100%;
+        display: flex;
+        flex-direction: column; 
+        .plot-label{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: left;
+          font-weight: 900;
+        }
+        .plot-value{
+          display: table-cell;
+          vertical-align: middle;
+          text-align: left;
+        }
+      }
+
+    .movie-details-top {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+    }
+    .movie-details-right {
+        height: 30vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column; 
+
+    }
+
+    .movie-details-left {
+        height: 30vh;
+        width: 100%;
+    }
+
+    .movie-poster {
+        display: block;
+        width: auto;
+        height: 100%;
+    }
+    .poster-image {
+        height: 100%;
+        width: auto;
+    }
+
+    .select-platform-type {
+        overflow: visible;
+        position: relative;  
+        max-width: 100%;
+        min-width: 100%;
+        .select-text {
+          padding-left: 1.5rem;
+          padding-right: 1rem;
+          font-size: 1.5rem;
+          padding-top: 0.2rem;
+          min-width: 0;
+        }
+        .select-icon {
+          padding-right: 1.87rem;
+        }
+      }
+      .button-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+      }
 }

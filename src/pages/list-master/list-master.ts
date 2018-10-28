@@ -1,6 +1,7 @@
+import { Notifications } from './../../providers/notification-provider/notification';
 import { OMDBApiDto } from './../../models/OmdbApiDto';
 import { MovieProvider } from './../../providers/movie/movie';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 
 import { Item } from '../../models/item';
@@ -8,6 +9,7 @@ import { Items } from '../../providers';
 import { OmdbApiProvider } from '../../providers/omdb-api/omdb-api';
 import { Subject, Subscription } from 'rxjs';
 import 'rxjs/add/operator/takeUntil';
+import { MovieCardComponent } from '../../components/movie-card/movie-card';
 
 
 
@@ -16,13 +18,14 @@ import 'rxjs/add/operator/takeUntil';
   templateUrl: 'list-master.html'
 })
 export class ListMasterPage implements OnInit {
+ 
 
   movieList: OMDBApiDto[];
   originalList: OMDBApiDto[];
   sub: Subscription;
 
 
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public api: OmdbApiProvider, public movie: MovieProvider) {
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public api: OmdbApiProvider, public movie: MovieProvider, public notifications: Notifications) {
     this.initMovieListSub();
   }
 
@@ -30,7 +33,6 @@ export class ListMasterPage implements OnInit {
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
-
   }
 
   ngOnDestroy() {
@@ -41,9 +43,16 @@ export class ListMasterPage implements OnInit {
     this.initMovieList();
   }
 
-  async initMovieList(): Promise<void> {
-    this.movieList = await this.movie.getMoviesByUser();
-    this.originalList = this.movieList.map(e => Object.assign({}, e));
+  public async initMovieList(): Promise<void> {
+    try {
+      await this.notifications.presentLoader();
+      this.movieList = await this.movie.getMoviesByUser();
+      this.originalList = this.movieList.map(e => Object.assign({}, e));
+      await this.notifications.dismissLoader();
+    } catch (error) {
+      console.error(error);
+      await this.notifications.dismissLoader();
+    }  
   }
 
   initMovieListSub(): void {
@@ -83,10 +92,12 @@ export class ListMasterPage implements OnInit {
   /**
    * Navigate to the detail page for this item.
    */
-  openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
-      item: item
-    });
+  openItem(movie: OMDBApiDto) {
+    let profileModal = this.modalCtrl.create(MovieCardComponent, movie);
+    profileModal.present();
+
+
+
   }
 
   /**

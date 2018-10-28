@@ -1,48 +1,52 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{ 'CARDS_TITLE' | translate }}</ion-title>
+    <ion-title *ngIf="movieObject">{{movieObject.title}}</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="closeModal()">Close</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
-<ion-content>
-
-  <ion-card>
-<!-- 
-    <ion-item>
-      <ion-avatar item-start>
-        <img [src]="item.user.avatar">
-      </ion-avatar>
-      <h2>{{item.user.name}}</h2>
-      <p>{{item.date}}</p>
-    </ion-item>
-
-    <img [src]="item.image">
-
-    <ion-card-content>
-      <p>{{item.content}}</p>
-    </ion-card-content> -->
-
-    <ion-row>
-      <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-            <ion-icon name='thumbs-up'></ion-icon>
-            12 Likes
-          </button>
-      </ion-col>
-      <ion-col>
-        <button ion-button color="primary" clear small icon-start>
-            <ion-icon name='text'></ion-icon>
-            4 Comments
-          </button>
-      </ion-col>
-      <ion-col center text-center>
-        <ion-note>
-          11h ago
-        </ion-note>
-      </ion-col>
-    </ion-row>
-  </ion-card>
-</ion-content>
+<ion-card class='popover'>
+  <ion-card-content>
+    <div class="movie-modal-container">
+      <div class="movie-details-container">
+        <div class="movie-details-top">
+          <div class="movie-details-left">
+            <div class="detail-container">
+              <span class="label">Title: </span>
+              <span class="value">{{movieObject.title}}</span>
+            </div>
+            <div class="detail-container">
+              <span class="label">Director: </span>
+              <span class="value">{{movieObject.Director}}</span>
+            </div>
+            <div class="detail-container">
+              <span class="label">Actors: </span>
+              <span class="value">{{movieObject.Actors}}</span>
+            </div>
+          </div>
+          <div class="movie-details-right">
+            <div class="movie-poster">
+              <img class="poster-image" [src]="movieObject.Poster">
+            </div>
+          </div>
+        </div>
+        <div class="movie-plot-summary">
+          <span class="plot-label">Plot: </span>
+          <span class="plot-value">{{movieObject.Plot}}</span>
+        </div>
+      </div>
+      <ion-select interface="{{getSelectInterface()}}" class="select-platform-type" [placeholder]="'Select Movie Platform'">
+        <ion-option *ngFor='let platformsIterated of platforms; let index = index' (ionSelect)="updateMoviePlatform(platformsIterated)"
+          [value]="platformsIterated">
+          <span>{{platformsIterated.displayable}}</span>
+        </ion-option>
+      </ion-select>
+      <div class="button">
+        <button ion-button block class="button" (click)="removeMovie()"> Delete Movie </button>
+      </div>
+    </div>
+  </ion-card-content>
+</ion-card>
