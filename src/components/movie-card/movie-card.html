@@ -39,7 +39,7 @@
         </div>
       </div>
       <ion-select interface="{{getSelectInterface()}}" class="select-platform-type" [placeholder]="'Select Movie Platform'">
-        <ion-option *ngFor='let platformsIterated of platforms; let index = index' (ionSelect)="updateMoviePlatform(platformsIterated)"
+        <ion-option *ngFor='let platformsIterated of platforms; let index = index' (ionSelect)="updateMoviePlatform(platformsIterated)" [selected]="currentPlatform"
           [value]="platformsIterated">
           <span>{{platformsIterated.displayable}}</span>
         </ion-option>
