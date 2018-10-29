@@ -1,3 +1,5 @@
+import { ListMasterPageModule } from './../pages/list-master/list-master.module';
+import { SettingsPageModule } from './../pages/settings/settings.module';
 import { SignupPage } from './../pages/signup/signup';
 import { LoginPage } from './../pages/login/login';
 import { WelcomePage } from './../pages/welcome/welcome';
@@ -14,6 +16,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { SearchPage } from '../pages/search/search';
 import { CardsPage } from '../components/cards/cards';
 import { TabsPage } from '../pages/tabs/tabs';
+import { SearchPageModule } from '../pages/search/search.module';
 
 
 @NgModule({
@@ -21,9 +24,6 @@ import { TabsPage } from '../pages/tabs/tabs';
     WelcomePage,
     LoginPage,
     SignupPage,
-    ListMasterPage,
-    SettingsPage,
-    SearchPage,
     CardsPage,
     TabsPage
   ],
@@ -32,6 +32,9 @@ import { TabsPage } from '../pages/tabs/tabs';
     IonicModule,
     ReactiveFormsModule,
     ComponentsModule,
+    SettingsPageModule,
+    SearchPageModule,
+    ListMasterPageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,9 +50,6 @@ import { TabsPage } from '../pages/tabs/tabs';
     WelcomePage,
     LoginPage,
     SignupPage,
-    ListMasterPage,
-    SettingsPage,
-    SearchPage,
     CardsPage,
     TabsPage
   ],
