@@ -14,7 +14,7 @@ movie-card {
     //desktop
     @media screen and (min-height: $media-height-desktop)  {
         .movie-modal-container{
-            height: 66vh; 
+            height: auto; 
             width: auto; 
             margin-top: 2rem;
             display: flex;
