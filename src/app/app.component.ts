@@ -44,6 +44,7 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+    this.lockOrientation();
   }
 
 
