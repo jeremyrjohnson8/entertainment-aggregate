@@ -77,7 +77,8 @@ export function provideSettings(storage: Storage) {
     StatusBar,
     { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    MemoryStoreProvider
+    MemoryStoreProvider,
+    ScreenOrientation
   ]
 })
 export class AppModule { }

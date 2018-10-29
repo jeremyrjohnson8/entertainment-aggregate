@@ -4,8 +4,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
-// import 'rxjs/add/operator/mapTo';
-// import { of } from 'rxjs';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -31,7 +31,12 @@ export class MyApp {
     { title: 'Search', component: 'SearchPage' }
   ]
 
-  constructor(private translate: TranslateService, platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, 
+    platform: Platform, 
+    private config: Config, 
+    private statusBar: StatusBar, 
+    private splashScreen: SplashScreen, 
+    private screenOrientation: ScreenOrientation) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -39,6 +44,11 @@ export class MyApp {
       this.splashScreen.hide();
     });
     this.initTranslate();
+  }
+
+
+  lockOrientation(): void {
+    this.screenOrientation.lock('portrait');
   }
 
   initTranslate() {

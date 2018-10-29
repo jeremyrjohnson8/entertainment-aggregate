@@ -1,11 +1,10 @@
 import { MovieProvider } from './../../providers/movie/movie';
 import { Notifications } from './../../providers/notification-provider/notification';
-import { OMDBApiDto } from './../../models/OmdbApiDto';
+import { OMDBApiDto, platformArray } from './../../models/OmdbApiDto';
 import { Component } from '@angular/core';
 import { ViewController, NavController, NavParams, AlertController } from 'ionic-angular';
 import { PlatformUtil } from '../../utils/platform-util';
 import { MoviePlatform } from '../../pages/search/search';
-import { MoviePlatformEnum } from '../../enums/platforms';
 
 
 @Component({
@@ -30,25 +29,16 @@ export class MovieCardComponent {
   ngOnInit() {
     this.movieObject = this.navParams.data;
 
-    this.platforms = [{
-      value: MoviePlatformEnum.DVD,
-      displayable: `DVD`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.BLURAY,
-      displayable: `BLU-RAY`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.VHS,
-      displayable: `VHS`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.AMAZON,
-      displayable: `Amazon Prime`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.VUDU,
-      displayable: `Vudu Digital`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.APPLE,
-      displayable: `Apple TV`
-    } as MoviePlatform]
+    this.platforms = platformArray;
+  }
+
+  getCurrentPlatform(): void {
+    if (this.movieObject.platform) {
+      let index = this.platforms.findIndex(e => e.value == this.movieObject.platform.value);
+      if (index && index >= 0) {
+        this.currentPlatform = this.platforms[index];
+      }
+    }
   }
 
   public closeModal(): void {
@@ -62,7 +52,10 @@ export class MovieCardComponent {
   public async updateMoviePlatform(moviePlatform: MoviePlatform): Promise<void> {
     this.currentPlatform = moviePlatform;
     this.movieObject.platform = moviePlatform;
+    await this.notifications.presentLoader();
     await this.movieProvider.updateMoviePlatform(this.movieObject.platform.value, this.movieObject.title);
+    await this.notifications.dismissLoader();
+    this.notifications.showToast(`Platform successfully updated`);
   }
 
   public async removeMovie(): Promise<void> {
@@ -79,7 +72,7 @@ export class MovieCardComponent {
         },
         {
           text: 'Confirm',
-          handler: ()  => {
+          handler: () => {
             this.doIt();
           }
         }

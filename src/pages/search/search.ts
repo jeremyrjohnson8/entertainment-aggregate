@@ -4,7 +4,7 @@ import { NavController, NavParams } from 'ionic-angular';
 
 
 import { OmdbApiProvider } from '../../providers/omdb-api/omdb-api';
-import { OMDBApiDto } from '../../models/OmdbApiDto';
+import { OMDBApiDto, platformArray } from '../../models/OmdbApiDto';
 import { Notifications } from '../../providers/notification-provider/notification';
 import { MoviePlatformEnum } from '../../enums/platforms';
 
@@ -24,25 +24,7 @@ export class SearchPage implements OnInit {
     public notifications: Notifications) { }
 
   ngOnInit(): void {
-    this.platforms = [{
-      value: MoviePlatformEnum.DVD,
-      displayable: `DVD`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.BLURAY,
-      displayable: `BLU-RAY`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.VHS,
-      displayable: `VHS`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.AMAZON,
-      displayable: `Amazon Prime`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.VUDU,
-      displayable: `Vudu Digital`
-    } as MoviePlatform, {
-      value: MoviePlatformEnum.APPLE,
-      displayable: `Apple TV`
-    } as MoviePlatform]
+    this.platforms = platformArray;
   }
   public async searchMovie(searchTerm: string): Promise<void> {
     this.notifications.presentLoader();

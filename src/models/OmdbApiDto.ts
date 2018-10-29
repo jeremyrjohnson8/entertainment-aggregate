@@ -1,5 +1,6 @@
+import { MoviePlatform } from './../pages/search/search';
+import { MoviePlatformEnum } from './../enums/platforms';
 import { IOMDBApi } from "../interfaces/IOMDBApiDTO";
-import { MoviePlatform } from '../pages/search/search';
 
 export class OMDBApiDto {
 
@@ -26,11 +27,11 @@ export class OMDBApiDto {
     public Production: string;
     public Website: string;
     public Response: string;
-    public platform: MoviePlatform; 
+    public platform: MoviePlatform;
     public errorOccurred: boolean;
     public errorMessage: string;
 
-     constructor(omdbResult?: IOMDBApi) {
+    constructor(omdbResult?: IOMDBApi) {
         this.title = omdbResult && omdbResult.Title || "";
         this.Year = omdbResult && omdbResult.Year || "";
         this.Rated = omdbResult && omdbResult.Rated || "";
@@ -44,7 +45,7 @@ export class OMDBApiDto {
         this.Language = omdbResult && omdbResult.Language || "";
         this.Country = omdbResult && omdbResult.Country || "";
         this.Poster = omdbResult && omdbResult.Poster || "";
-        this.Ratings = omdbResult && omdbResult.Ratings || [{Source: "", Value: ""}];
+        this.Ratings = omdbResult && omdbResult.Ratings || [{ Source: "", Value: "" }];
         this.Metascore = omdbResult && omdbResult.Metascore || "";
         this.imdbVotes = omdbResult && omdbResult.imdbVotes || "";
         this.imdbID = omdbResult && omdbResult.imdbID || "";
@@ -57,3 +58,23 @@ export class OMDBApiDto {
     }
 
 }
+
+export const platformArray: MoviePlatform[] = [{
+    value: MoviePlatformEnum.DVD,
+    displayable: `DVD`
+} as MoviePlatform, {
+    value: MoviePlatformEnum.BLURAY,
+    displayable: `BLU-RAY`
+} as MoviePlatform, {
+    value: MoviePlatformEnum.VHS,
+    displayable: `VHS`
+} as MoviePlatform, {
+    value: MoviePlatformEnum.AMAZON,
+    displayable: `Amazon Prime`
+} as MoviePlatform, {
+    value: MoviePlatformEnum.VUDU,
+    displayable: `Vudu Digital`
+} as MoviePlatform, {
+    value: MoviePlatformEnum.APPLE,
+    displayable: `Apple TV`
+} as MoviePlatform]
