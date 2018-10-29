@@ -22,6 +22,7 @@ import { PagesModule } from '../modules/pages.module';
 import { ComponentsModule } from '../modules/components.module';
 import { environment } from '../environments/environment';
 import { MemoryStoreProvider } from '../providers/memory-store/memory-store';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 
 
