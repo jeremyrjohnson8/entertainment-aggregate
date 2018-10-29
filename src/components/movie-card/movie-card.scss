@@ -1,6 +1,6 @@
 movie-card {
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
     //mobile
     @media screen and (max-height: $media-height-iphone-x)  {
         .movie-modal-container{
@@ -16,7 +16,7 @@ movie-card {
         .movie-modal-container{
             height: auto; 
             width: auto; 
-            margin-top: 2rem;
+            margin-top: 5rem;
             display: flex;
             flex-direction: column;
         }
