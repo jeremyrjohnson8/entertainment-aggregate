@@ -1,35 +1,36 @@
-import { LOGIN_PAGE } from './../constants/page.constants';
 import { Component, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { Config, Nav, Platform } from 'ionic-angular';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { LoginPage } from '../pages/login/login';
+import { PlatformUtil } from '../utils/platform-util';
 
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage = LOGIN_PAGE;
+  rootPage = LoginPage;
 
   @ViewChild(Nav) nav: Nav;
 
 
-  // set up page list
-  pages: any[] = [
-    { title: 'Tutorial', component: 'TutorialPage' },
-    { title: 'Welcome', component: 'WelcomePage' },
-    { title: 'Tabs', component: 'TabsPage' },
-    { title: 'Cards', component: 'CardsPage' },
-    { title: 'Content', component: 'ContentPage' },
-    { title: 'Login', component: 'LoginPage' },
-    { title: 'Signup', component: 'SignupPage' },
-    { title: 'Master Detail', component: 'ListMasterPage' },
-    { title: 'Menu', component: 'MenuPage' },
-    { title: 'Settings', component: 'SettingsPage' },
-    { title: 'Search', component: 'SearchPage' }
-  ]
+  // // set up page list
+  // pages: any[] = [
+  //   { title: 'Tutorial', component: 'TutorialPage' },
+  //   { title: 'Welcome', component: 'WelcomePage' },
+  //   { title: 'Tabs', component: 'TabsPage' },
+  //   { title: 'Cards', component: 'CardsPage' },
+  //   { title: 'Content', component: 'ContentPage' },
+  //   { title: 'Login', component: 'LoginPage' },
+  //   { title: 'Signup', component: 'SignupPage' },
+  //   { title: 'Master Detail', component: 'ListMasterPage' },
+  //   { title: 'Menu', component: 'MenuPage' },
+  //   { title: 'Settings', component: 'SettingsPage' },
+  //   { title: 'Search', component: 'SearchPage' }
+  // ]
 
   constructor(private translate: TranslateService, 
     platform: Platform, 
@@ -49,7 +50,9 @@ export class MyApp {
 
 
   lockOrientation(): void {
-    this.screenOrientation.lock('portrait');
+    if (PlatformUtil.isMobile()) {
+      this.screenOrientation.lock('portrait');
+    }
   }
 
   initTranslate() {
@@ -81,7 +84,7 @@ export class MyApp {
   openPage() {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(LOGIN_PAGE);
+    this.nav.setRoot(LoginPage.name);
   }
 
   checkAuthStatus(): void {

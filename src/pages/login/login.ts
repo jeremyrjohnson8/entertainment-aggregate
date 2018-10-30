@@ -1,4 +1,5 @@
-import { SIGN_UP_PAGE, TABS_PAGE } from './../../constants/page.constants';
+import { SignupPage } from './../signup/signup';
+// import { SIGN_UP_PAGE, TABS_PAGE } from './../../constants/page.constants';
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController } from 'ionic-angular';
@@ -6,6 +7,7 @@ import { LoginProvider } from '../../providers/login-provider/login-provider';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../models/user-model';
 import { Notifications } from '../../providers/notification-provider/notification';
+import { TabsPage } from '../tabs/tabs';
 
 
 @Component({
@@ -47,7 +49,7 @@ export class LoginPage implements OnInit {
       // console.log(this.userModel.email);
       await this.notifications.dismissLoader();
       this.notifications.showToast(`Success Login`);
-      this.navCtrl.setRoot(TABS_PAGE);
+      this.navCtrl.setRoot(TabsPage);
     } catch {
       await this.notifications.dismissLoader();
       this.notifications.showToast(`Failed Login`);
@@ -63,6 +65,6 @@ export class LoginPage implements OnInit {
   }
 
   public navigateToSignup(): void {
-    this.navCtrl.setRoot(SIGN_UP_PAGE);
+    this.navCtrl.setRoot(SignupPage);
   }
 }

@@ -5,24 +5,25 @@ import { BrowserModule } from '@angular/platform-browser';
 import { Camera } from '@ionic-native/camera';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { IonicStorageModule, Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { Items } from '../mocks/providers/items';
-import { Settings, User, Api } from '../providers';
+import { User, Api } from '../providers';
 import { MyApp } from './app.component';
 
 /// Firebase Inputs
 import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { PagesModule } from '../modules/pages.module';
 import { ComponentsModule } from '../modules/components.module';
 import { environment } from '../environments/environment';
 import { MemoryStoreProvider } from '../providers/memory-store/memory-store';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { LoginPage } from '../pages/login/login';
+import { SignupPage } from '../pages/signup/signup';
+import { TabsPageModule } from '../pages/tabs/tabs.module';
 
 
 
@@ -32,19 +33,11 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export function provideSettings(storage: Storage) {
-  /**
-   * The Settings provider takes a set of default settings for your app.
-   *
-   * You can add new settings options at any time. Once the settings are saved,
-   * these values will not overwrite the saved values (this can be done manually if desired).
-   */
-  return {} as Settings;
-}
 
 @NgModule({
   declarations: [
-    MyApp
+    MyApp,
+    SignupPage,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +45,7 @@ export function provideSettings(storage: Storage) {
     ComponentsModule,
     HttpClientModule,
     ProvidersModule,
+    TabsPageModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -61,13 +55,14 @@ export function provideSettings(storage: Storage) {
     }),
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(environment.firebase),
-    IonicStorageModule.forRoot(),
-    AngularFireAuthModule,
-    AngularFireDatabaseModule
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp
+    MyApp,
+    LoginPage,
+    SignupPage
+    
   ],
   providers: [
     Api,
@@ -76,7 +71,6 @@ export function provideSettings(storage: Storage) {
     Camera,
     SplashScreen,
     StatusBar,
-    { provide: Settings, useFactory: provideSettings, deps: [Storage] },
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     MemoryStoreProvider,
     ScreenOrientation

@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { UserModel } from '../../models/user-model';
 import { MoviePlatformEnum } from '../../enums/platforms';
+import { IMovieObject } from '../../interfaces/IOMDBApiDTO';
 
 /*
   Generated class for the MovieProvider provider.
@@ -47,8 +48,8 @@ export class MovieProvider {
     public async getMovieFromMainDBByTitle(title: string): Promise<OMDBApiDto> {
         try {
             let adjustedTitle = this.adjustTitle(title);
-            let snapshot = await this.db.object(`/moviedb/${adjustedTitle}`).valueChanges().take(1).toPromise() as OMDBApiDto;
-            return snapshot;
+            let snapshot = await this.db.object(`/moviedb/${adjustedTitle}`).valueChanges().take(1).toPromise() as IMovieObject;
+            return new OMDBApiDto(snapshot);
         } catch (error) {
             console.error(`Error: ${error}`)
         }
@@ -57,9 +58,10 @@ export class MovieProvider {
 
     public async getMoviesByUser(): Promise<OMDBApiDto[]> {
         try {
-            let userMovieList = await this.db.list(`/movie/${this.user.uid}`).valueChanges().take(1).toPromise() as OMDBApiDto[];
-            this.memoryStoreProvider.movieListMemoryData().publish(userMovieList);
-            return userMovieList;
+            let userMovieList = await this.db.list(`/movie/${this.user.uid}`).valueChanges().take(1).toPromise() as IMovieObject[];
+            let userMovieObjectList = userMovieList.map(e => new OMDBApiDto(e)); 
+            this.memoryStoreProvider.movieListMemoryData().publish(userMovieObjectList);
+            return userMovieObjectList;
         } catch (error) {
             console.error(`Error: ${error}`)
         }

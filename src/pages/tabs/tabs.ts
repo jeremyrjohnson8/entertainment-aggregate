@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NavController } from 'ionic-angular';
-import { LIST_MASTER_PAGE_TAB, SETTINGS_PAGE_TAB, SEARCH_PAGE_TAB } from '../../constants/page.constants';
+import { ListMasterPage } from '../list-master/list-master';
+import { SearchPage } from '../search/search';
+import { SettingsPage } from '../settings/settings';
+// import { LIST_MASTER_PAGE_TAB, SETTINGS_PAGE_TAB, SEARCH_PAGE_TAB } from '../../constants/page.constants';
 
 
 @Component({
@@ -9,9 +12,9 @@ import { LIST_MASTER_PAGE_TAB, SETTINGS_PAGE_TAB, SEARCH_PAGE_TAB } from '../../
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  tab1Root: any = LIST_MASTER_PAGE_TAB;
-  tab2Root: any = SEARCH_PAGE_TAB;
-  tab3Root: any = SETTINGS_PAGE_TAB;
+  tab1Root: any = ListMasterPage;
+  tab2Root: any = SearchPage;
+  tab3Root: any = SettingsPage;
 
   tab1Title = " ";
   tab2Title = " ";

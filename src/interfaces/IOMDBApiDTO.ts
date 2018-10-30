@@ -1,4 +1,10 @@
-export interface IOMDBApi {
+export interface IOMDBApi extends IMovieObject {
+   
+
+}
+
+
+export interface IMovieObject {
     Title: string;
     Year: string;
     Rated: string;
@@ -22,5 +28,5 @@ export interface IOMDBApi {
     Production: string;
     Website: string;
     Response: string;
-
+    Platform: number;
 }

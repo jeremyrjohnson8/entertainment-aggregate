@@ -30,11 +30,12 @@ export class MovieCardComponent {
     this.movieObject = this.navParams.data;
 
     this.platforms = platformArray;
+    this.getCurrentPlatform();
   }
 
   getCurrentPlatform(): void {
     if (this.movieObject.platform) {
-      let index = this.platforms.findIndex(e => e.value == this.movieObject.platform.value);
+      let index = this.platforms.findIndex(e => e.value == this.movieObject.platform);
       if (index && index >= 0) {
         this.currentPlatform = this.platforms[index];
       }
@@ -51,9 +52,9 @@ export class MovieCardComponent {
 
   public async updateMoviePlatform(moviePlatform: MoviePlatform): Promise<void> {
     this.currentPlatform = moviePlatform;
-    this.movieObject.platform = moviePlatform;
+    this.movieObject.platform = moviePlatform.value;
     await this.notifications.presentLoader();
-    await this.movieProvider.updateMoviePlatform(this.movieObject.platform.value, this.movieObject.title);
+    await this.movieProvider.updateMoviePlatform(this.movieObject.platform, this.movieObject.title);
     await this.notifications.dismissLoader();
     this.notifications.showToast(`Platform successfully updated`);
   }

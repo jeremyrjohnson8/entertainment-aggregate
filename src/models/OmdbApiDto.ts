@@ -1,6 +1,6 @@
 import { MoviePlatform } from './../pages/search/search';
 import { MoviePlatformEnum } from './../enums/platforms';
-import { IOMDBApi } from "../interfaces/IOMDBApiDTO";
+import { IMovieObject } from "../interfaces/IOMDBApiDTO";
 
 export class OMDBApiDto {
 
@@ -27,11 +27,11 @@ export class OMDBApiDto {
     public Production: string;
     public Website: string;
     public Response: string;
-    public platform: MoviePlatform;
+    public platform: number;
     public errorOccurred: boolean;
     public errorMessage: string;
 
-    constructor(omdbResult?: IOMDBApi) {
+    constructor(omdbResult?: IMovieObject) {
         this.title = omdbResult && omdbResult.Title || "";
         this.Year = omdbResult && omdbResult.Year || "";
         this.Rated = omdbResult && omdbResult.Rated || "";
@@ -55,8 +55,16 @@ export class OMDBApiDto {
         this.Production = omdbResult && omdbResult.Production || "";
         this.Website = omdbResult && omdbResult.Website || "";
         this.Response = omdbResult && omdbResult.Response || "";
+        this.platform = omdbResult && omdbResult.Platform || null; 
     }
 
+    public get vehiclePlatformDisplayable(): string {
+        if (this.platform) {
+            let displayable = platformArray[platformArray.findIndex(e => e.value === this.platform)].displayable;
+            return displayable;
+        }
+        return;
+    }
 }
 
 export const platformArray: MoviePlatform[] = [{
